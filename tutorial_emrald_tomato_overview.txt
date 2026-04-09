@@ -1,0 +1,48 @@
+1. Dataset Overview
+
+The dataset contains 20,000 observations recorded at 100-unit timestamp intervals. It captures market depth (up to 3 levels), mid-prices, and profit/loss data for a single trading day (Day -1).
+
+    Total Records: 20,000 (10,000 per product).
+
+    Time Span: Timestamps 0 to 999,900.
+
+    Data Quality: High for Level 1 and Level 2 order book data. Level 3 data (bid/ask price/volume 3) is missing in over 97% of the records, indicating a shallow order book where liquidity is concentrated in the top two tiers.
+
+2. Comparative Analysis of Products
+Feature	EMERALDS	TOMATOES
+Mean Mid-Price	~9,999.99	~4,977.57
+Price Volatility	Very Low (Std Dev: 0.72)	Moderate (Std Dev: 14.58)
+Price Range	9,996.0 — 10,004.0	4,946.5 — 5,011.0
+Avg. Level 1 Volume	~12.46 units	~7.46 units
+Avg. Bid-Ask Spread	High (~15.74)	Low (~12.98)
+EMERALDS: The Stable Asset
+
+Emeralds act as a highly stable "anchor" asset. The price rarely deviates more than 4 units from the 10,000 mark.
+
+    Behavior: Mean-reverting and extremely low variance.
+
+    Liquidity: Higher volume at the best bid/ask compared to Tomatoes, but with a wider spread, suggesting a more "expensive" but deeper market.
+
+TOMATOES: The Volatile Asset
+
+Tomatoes exhibit significant price movement throughout the session.
+
+    Behavior: Clearer trends and larger price swings. It is the more "tradeable" asset for strategies relying on price direction or volatility.
+
+    Liquidity: Lower liquidity at Level 1 and a tighter spread, which often indicates a more competitive but thinner market.
+    Getty Images
+
+3. Order Book & Liquidity Insights
+
+    Spread Analysis: The spread for Emeralds is consistently wider than for Tomatoes. For Emeralds, the spread is often 16 units, while Tomatoes fluctuate more frequently with a tighter average of ~13.
+
+    Market Depth: Because Level 3 data is so sparse, any large trade would likely result in significant slippage, moving the price immediately to Level 2 or beyond.
+
+4. Profit and Loss (PnL)
+
+The profit_and_loss column is 0.0 for all entries. This indicates that the file contains "passive" market data (the state of the market) rather than a record of active trading or "filled" orders for a specific portfolio.
+Summary for Strategy Development
+
+    For Market Making: Emeralds are ideal due to their extreme price stability and wider spreads, allowing for consistent "capture" of the spread with low inventory risk.
+
+    For Directional Trading: Tomatoes provide the necessary volatility and price action. A trend-following or mean-reversion strategy would be more applicable here than with Emeralds.
